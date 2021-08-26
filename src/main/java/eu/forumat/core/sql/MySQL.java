@@ -53,11 +53,35 @@ public class MySQL {
 
     }
 
+    public CompletableFuture<Boolean> executeUpdate(String query, Object... args) {
+
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return prepareStatement(query, args).execute();
+            } catch (SQLException e) {
+                return false;
+            }
+        }, executorService);
+
+    }
+
     public CompletableFuture<ResultSet> getResult(PreparedStatement preparedStatement) {
 
         return CompletableFuture.supplyAsync(() -> {
             try {
                 return preparedStatement.executeQuery();
+            } catch (SQLException e) {
+                return null;
+            }
+        }, executorService);
+
+    }
+
+    public CompletableFuture<ResultSet> getResult(String query, Object... args) {
+
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return prepareStatement(query, args).executeQuery();
             } catch (SQLException e) {
                 return null;
             }
