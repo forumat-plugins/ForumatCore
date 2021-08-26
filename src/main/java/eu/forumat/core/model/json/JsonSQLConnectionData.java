@@ -18,7 +18,7 @@ public class JsonSQLConnectionData {
     private final int port;
 
     @SneakyThrows
-    private Connection getConnection() {
+    public Connection getConnection() {
         MysqlDataSource dataSource = new MysqlDataSource();
 
         dataSource.setServerName(host);
