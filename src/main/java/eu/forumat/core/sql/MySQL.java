@@ -30,6 +30,8 @@ public class MySQL {
                 preparedStatement.setString(i, (String) arg);
             } else if (arg instanceof Integer) {
                 preparedStatement.setInt(i, (int) arg);
+            } else if (arg instanceof Float) {
+                preparedStatement.setFloat(i, ((Float) arg));
             } else {
                 preparedStatement.setObject(i, arg);
             }
