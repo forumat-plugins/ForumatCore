@@ -26,15 +26,28 @@ public class JsonInventory {
         FastInv fastInv = new FastInv(getSize(), ChatColor.translateAlternateColorCodes('&', getTitle()));
 
         for (int i = 0; i < this.getSize(); i++) {
-            fastInv.setItem(i, new ItemBuilder(getFillItemMaterial()).data(getFillItemSubID()).name("§6").build(), event -> event.setCancelled(true));
+            if (getFillItemMaterial() != Material.AIR) {
+                fastInv.setItem(i, new ItemBuilder(getFillItemMaterial()).data(getFillItemSubID()).name("§6").build(), event -> event.setCancelled(true));
+            } else {
+                fastInv.removeItem(i);
+            }
         }
 
+
         for (int i : fastInv.getBorders()) {
-            fastInv.setItem(i, new ItemBuilder(getBorderMaterial()).data(getBorderSubID()).name("§6").build(), event -> event.setCancelled(true));
+            if (getBorderMaterial() != Material.AIR) {
+                fastInv.setItem(i, new ItemBuilder(getBorderMaterial()).data(getBorderSubID()).name("§6").build(), event -> event.setCancelled(true));
+            } else {
+                fastInv.removeItem(i);
+            }
         }
 
         for (int i : fastInv.getCorners()) {
-            fastInv.setItem(i, new ItemBuilder(getCornerMaterial()).data(getCornerSubID()).name("§6").build(), event -> event.setCancelled(true));
+            if (getCornerMaterial() != Material.AIR) {
+                fastInv.setItem(i, new ItemBuilder(getCornerMaterial()).data(getCornerSubID()).name("§6").build(), event -> event.setCancelled(true));
+            } else {
+                fastInv.removeItem(i);
+            }
         }
 
         for (JsonItem item : otherItems) {
