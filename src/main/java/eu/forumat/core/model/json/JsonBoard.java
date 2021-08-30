@@ -19,7 +19,7 @@ public class JsonBoard {
 
     private final String[] names;
     private final int animationTick;
-    private final String[] lines;
+    private final List<String> lines;
 
     private BukkitTask updater;
     private AtomicInteger currentAnimationIndex ;
@@ -46,7 +46,7 @@ public class JsonBoard {
         }, 0, animationTick);
 
         int i = 0;
-        final List<String> lines = Arrays.stream(this.lines).collect(Collectors.toList());
+        final List<String> lines = getLines();
         Collections.reverse(lines);
         for (String line : lines) {
             String finalLineText = line;
