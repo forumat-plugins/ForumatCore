@@ -23,6 +23,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class FastBoard {
 
+    private static final Map<UUID, FastBoard> PLAYER_BOARDS = new HashMap<>();
+
     private static final Map<Class<?>, Field[]> PACKETS = new HashMap<>(8);
     private static final String[] COLOR_CODES = Arrays.stream(ChatColor.values())
             .map(Object::toString)
@@ -142,15 +144,21 @@ public class FastBoard {
      * @param player the owner of the scoreboard
      */
     public FastBoard(Player player) {
+
         this.player = Objects.requireNonNull(player, "player");
         this.id = "fb-" + Integer.toHexString(ThreadLocalRandom.current().nextInt());
 
         try {
+            PLAYER_BOARDS.put(player.getUniqueId(), this);
             sendObjectivePacket(ObjectiveMode.CREATE);
             sendDisplayObjectivePacket();
         } catch (Throwable t) {
             throw new RuntimeException("Unable to create scoreboard", t);
         }
+    }
+
+    public static FastBoard getBoard(Player player) {
+        return PLAYER_BOARDS.get(player.getUniqueId());
     }
 
     /**
