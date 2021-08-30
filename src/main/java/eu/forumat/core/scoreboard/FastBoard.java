@@ -1,5 +1,6 @@
 package eu.forumat.core.scoreboard;
 
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -23,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class FastBoard {
 
-    private static final Map<UUID, FastBoard> PLAYER_BOARDS = new HashMap<>();
+    @Getter private static final Map<UUID, FastBoard> PLAYER_BOARDS = new HashMap<>();
 
     private static final Map<Class<?>, Field[]> PACKETS = new HashMap<>(8);
     private static final String[] COLOR_CODES = Arrays.stream(ChatColor.values())
