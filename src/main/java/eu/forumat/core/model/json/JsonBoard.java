@@ -54,6 +54,7 @@ public class JsonBoard {
                 finalLineText = finalLineText.replace(placeholder, placeholderMap.get(placeholder));
             }
             fastBoard.updateLine(i, ChatColor.translateAlternateColorCodes('&', finalLineText));
+            i++;
         }
 
         return fastBoard;
