@@ -47,8 +47,15 @@ public class JsonBoard {
 
         int i = 0;
         final List<String> lines = getLines();
+        System.out.println("Raw Line Input: ");
+        for (String line : lines) {
+            System.out.println("- " + line + "[" + i + "]");
+            i++;
+        }
+        i = 0;
         Collections.reverse(lines);
         for (String line : lines) {
+            System.out.println("Registering Line: " + line + " with index " + i);
             String finalLineText = line;
             for (String placeholder : placeholderMap.keySet()) {
                 finalLineText = finalLineText.replace(placeholder, placeholderMap.get(placeholder));
