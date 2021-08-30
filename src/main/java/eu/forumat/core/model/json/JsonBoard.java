@@ -45,15 +45,8 @@ public class JsonBoard {
 
         }, 0, animationTick);
 
-        int i = 0;
         final List<String> lines = getLines();
-        System.out.println("Raw Line Input: ");
-        for (String line : lines) {
-            System.out.println("- " + line + "[" + i + "]");
-            i++;
-        }
-        i = 0;
-        Collections.reverse(lines);
+        int i = lines.size();
         for (String line : lines) {
             System.out.println("Registering Line: " + line + " with index " + i);
             String finalLineText = line;
@@ -61,7 +54,7 @@ public class JsonBoard {
                 finalLineText = finalLineText.replace(placeholder, placeholderMap.get(placeholder));
             }
             fastBoard.updateLine(i, ChatColor.translateAlternateColorCodes('&', finalLineText));
-            i++;
+            i--;
         }
 
         return fastBoard;
